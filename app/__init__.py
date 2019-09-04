@@ -83,7 +83,7 @@ def create_app(config_name):
 			if not user_id == bot_id:
 				slackhelper = SlackHelper()
 				slack_user_info = slackhelper.user_info(user_id)
-				user_name = slack_user_info['user']['display_name']
+				user_name = slack_user_info['user']['profile']['display_name']
 				slackhelper.post_message(f"Hi! {user_name} :smile:", channel)
 				print(slack_user_info)
 
