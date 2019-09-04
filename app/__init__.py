@@ -29,7 +29,7 @@ def create_app(config_name):
 			response_body = {'text': 'Invalid Command Sent - `/hackabot help` for available commands'}
 
 		if command_text[0] == 'info':
-			response_body = actions.help()
+			response_body = actions.info()
 
 		response = jsonify(response_body)
 		response.status_code = 200
