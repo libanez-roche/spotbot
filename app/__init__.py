@@ -46,7 +46,7 @@ def create_app(config_name):
 		slackhelper = SlackHelper()
 		slack_user_info = slackhelper.user_info(slack_uid)
 		redis_client.set(slack_uid, text)
-		response_body = "Location stored succesfully for user %s on %s" % (slack_uid, text)
+		response_body = "Location stored succesfully for user %s on %s" % (slack_user_info, text)
 		response = jsonify(response_body)
 		response.status_code = 200
 		return response
