@@ -13,5 +13,4 @@ class Actions:
 		Return the Available commands in the system and their usage format
 		"""
 		return {
-			'text': 'WELCOME TO THE SpotBot: \n '
-					'\n Allows to locate where users are sitting.}
+			'text': 'WELCOME TO THE SpotBot: \n\n Allows to locate where users are sitting.'}
