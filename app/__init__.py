@@ -52,4 +52,20 @@ def create_app(config_name):
 		response.status_code = 200
 		return response
 
+	@app.route('/locate', methods=['POST'])
+	def locate():
+		text = request.data.get('text')
+		text = text.split(' ')
+		user = text[0]
+
+		if not user.startswith('@'):
+			response_body = {'text': 'User must start with @'}
+		else:
+			location = redis_client.get(user) or 'The user hasn\'t set the location yet'
+			response_body = "The user %s is located in %s" % (user, location)
+
+		response = jsonify(response_body)
+		response.status_code = 200
+		return response
+
 	return app
