@@ -72,12 +72,14 @@ def create_app(config_name):
 	def reaction():
 		type = request.data.get('type')
 		event = request.data.get('event')
+		user = event['user']
+		channel = event['channel']
 
 		if type == 'url_verification':
 			response_body = request.data.get('challenge')
 		else:
 			slackhelper = SlackHelper()
-			slack_user_info = slackhelper.post_message('Hi! @{event['user']} :smile:',event['channel'])
+			slack_user_info = slackhelper.post_message('Hi! @{user} :smile:', channel)
 			response_body = 'Hi!'
 			print(request.data)
 
