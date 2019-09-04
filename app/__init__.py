@@ -56,7 +56,7 @@ def create_app(config_name):
 	def locate():
 		text = request.data.get('text')
 		text = text.split(' ')
-		user = text[0]
+		user = text[0][1:]
 
 		if not user.startswith('@'):
 			response_body = {'text': 'User must start with @'}
