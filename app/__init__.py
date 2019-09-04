@@ -1,5 +1,6 @@
 import os
 import redis
+import json
 from flask_api import FlaskAPI
 from config.env import app_env
 from app.utils.slackhelper import SlackHelper
@@ -45,8 +46,10 @@ def create_app(config_name):
 		slack_uid = request.data.get('user_id')
 		slackhelper = SlackHelper()
 		slack_user_info = slackhelper.user_info(slack_uid)
-		redis_client.set(slack_user_info.user.name, text)
-		response_body = "Location stored succesfully for user %s on %s" % (slack_user_info.user.name, text)
+		user_object = json.loads(slack_user_info)
+		user_name = user_object['user']['name']
+		redis_client.set(user_name, text)
+		response_body = "Location stored succesfully for user %s on %s" % (user_name, text)
 		response = jsonify(response_body)
 		response.status_code = 200
 		return response
