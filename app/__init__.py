@@ -56,11 +56,11 @@ def create_app(config_name):
 	def locate():
 		text = request.data.get('text')
 		text = text.split(' ')
-		user = text[0][1:]
 
 		if not user.startswith('@'):
 			response_body = {'text': 'User must start with @'}
 		else:
+			user = text[0][1:]
 			location = redis_client.get(user) or 'The user hasn\'t set the location yet'
 			response_body = "The user %s is located in %s" % (user, location)
 
