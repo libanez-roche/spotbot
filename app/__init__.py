@@ -14,6 +14,7 @@ allowed_commands = [
 
 def create_app(config_name):
 
+	bot_id = 'UMTM6Q95F'
 	app = FlaskAPI(__name__, instance_relative_config=False)
 	app.config.from_object(app_env[config_name])
 	app.config.from_pyfile('../config/env.py')
@@ -78,10 +79,11 @@ def create_app(config_name):
 		if type == 'url_verification':
 			response_body = request.data.get('challenge')
 		else:
-			slackhelper = SlackHelper()
-			slack_user_info = slackhelper.post_message('Hi! @{user} :smile:', channel)
-			response_body = 'Hi!'
-			print(request.data)
+			if not user == bot_id:
+				slackhelper = SlackHelper()
+				slack_user_info = slackhelper.post_message(f"Hi! @{user} :smile:", channel)
+				response_body = 'Hi!'
+				print(request.data)
 
 		response = jsonify(response_body)
 		response.status_code = 200
