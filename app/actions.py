@@ -11,4 +11,4 @@ class Actions:
 	def info(self):
 	
 		return {
-			'text': 'Hello! I am spotbot :smile:'
+			'text': 'Hello! I am spotbot :smile:'}
