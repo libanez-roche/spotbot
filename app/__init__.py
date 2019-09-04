@@ -68,4 +68,14 @@ def create_app(config_name):
 		response.status_code = 200
 		return response
 
+	@app.route('/reaction', methods=['POST'])
+	def reaction():
+		type = request.data.get('type')
+
+		if type == 'url_verification':
+			response = request.data.get('challenge')
+			
+		response.status_code = 200
+		return response
+
 	return app
