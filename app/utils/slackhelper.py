@@ -44,3 +44,10 @@ class SlackHelper:
 			user=uid,
 			token=self.slack_token
 		)
+
+	def is_pm(self, channel):
+		return self.slack_client.api_call(
+			"conversations.info",
+			channel=channel,
+			token=self.slack_token
+		)
