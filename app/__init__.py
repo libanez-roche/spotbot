@@ -83,9 +83,9 @@ def create_app(config_name):
 			if not user_id == bot_id:
 				slackhelper = SlackHelper()
 				slack_user_info = slackhelper.user_info(user_id)
-				user_name = slack_user_info['user']['name']
+				user_name = slack_user_info['user']['display_name']
 				slackhelper.post_message(f"Hi! {user_name} :smile:", channel)
-				print(request.data)
+				print(slack_user_info)
 
 		response = jsonify(response_body)
 		response.status_code = 200
