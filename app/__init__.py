@@ -79,7 +79,7 @@ def create_app(config_name):
 		if type == 'url_verification':
 			response_body = request.data.get('challenge')
 		else:
-			if not user == bot_id:
+			if not user_id == bot_id:
 				slackhelper = SlackHelper()
 				slack_user_info = slackhelper.user_info(user_id)
 				user_name = slack_user_info['user']['name']
