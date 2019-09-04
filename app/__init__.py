@@ -73,11 +73,12 @@ def create_app(config_name):
 		type = request.data.get('type')
 
 		if type == 'url_verification':
-			challenge = request.data.get('challenge')
+			response_body = request.data.get('challenge')
 		else:
+			response_body = request.data
 			print(request.data)
 
-		response = jsonify(challenge)
+		response = jsonify(response_body)
 		response.status_code = 200
 		return response
 
