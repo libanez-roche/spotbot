@@ -16,7 +16,7 @@ def create_app(config_name):
 	app.config.from_object(app_env[config_name])
 	app.config.from_pyfile('../config/env.py')
 
-	@app.route('/'spotbot'', methods=['POST'])
+	@app.route('/spotbot', methods=['POST'])
 	def hackabot():
 		command_text = request.data.get('text')
 		command_text = command_text.split(' ')
