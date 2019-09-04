@@ -73,7 +73,7 @@ def create_app(config_name):
 	def reaction():
 		type = request.data.get('type')
 		event = request.data.get('event')
-		user = event['user']
+		user_id = event['user']
 		channel = event['channel']
 
 		if type == 'url_verification':
@@ -81,7 +81,9 @@ def create_app(config_name):
 		else:
 			if not user == bot_id:
 				slackhelper = SlackHelper()
-				slack_user_info = slackhelper.post_message(f"Hi! @{user} :smile:", channel)
+				slack_user_info = slackhelper.user_info(user_id)
+				user_name = slack_user_info['user']['name']
+				slackhelper.post_message(f"Hi! {use_name} :smile:", channel)
 				response_body = 'Hi!'
 				print(request.data)
 
