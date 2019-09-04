@@ -79,12 +79,12 @@ def create_app(config_name):
 		if type == 'url_verification':
 			response_body = request.data.get('challenge')
 		else:
+			response_body = 'Hi!'
 			if not user_id == bot_id:
 				slackhelper = SlackHelper()
 				slack_user_info = slackhelper.user_info(user_id)
 				user_name = slack_user_info['user']['name']
 				slackhelper.post_message(f"Hi! {user_name} :smile:", channel)
-				response_body = 'Hi!'
 				print(request.data)
 
 		response = jsonify(response_body)
