@@ -83,7 +83,7 @@ def create_app(config_name):
 				slackhelper = SlackHelper()
 				slack_user_info = slackhelper.user_info(user_id)
 				user_name = slack_user_info['user']['name']
-				slackhelper.post_message(f"Hi! {use_name} :smile:", channel)
+				slackhelper.post_message(f"Hi! {user_name} :smile:", channel)
 				response_body = 'Hi!'
 				print(request.data)
 
