@@ -124,7 +124,7 @@ def create_app(config_name):
 					if len(redis_client.keys()) > 0:
 						for user in redis_client.keys():
 							print(user)
-							print slackhelper.user_info(user)
+							print(slackhelper.user_info(user))
 							slackhelper.post_message('Good morning! Where are you located today?', user)
 				else:
 					slackhelper.post_message('Sorry :disappointed:, I didn\'t understand your request. If you need to search for a user use his username with the @.\nThank you! :smile:', channel)
