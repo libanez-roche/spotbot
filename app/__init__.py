@@ -98,7 +98,7 @@ def create_app(config_name):
 					if location == 'The user hasn\'t set the location yet':
 						slackhelper.post_message(location, channel)
 					else:
-						slackhelper.post_message("The user %s is located in %s" % (user, location), channel
+						slackhelper.post_message("The user %s is located in %s" % (user, location), channel)
 				else:
 					slackhelper.post_message('User must start with @', channel)
 
