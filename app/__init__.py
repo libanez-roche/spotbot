@@ -94,11 +94,12 @@ def create_app(config_name):
 				print (text)
 				if pattern.match(text):
 					m = re.findall(r'[@]\w+', text)
+					print(m)
 					user = m[0]
-					location = redis_client.get(user[1:]) or 'The user hasn\'t set the location yet'
-					response_body = "The user %s is located in %s" % (user, location)
+					print(user)
+					response_body = "The user %s is located in %s" % (user, redis_client.get(user[1:])) or 'The user hasn\'t set the location yet'
 				else:
-					response_body = {'text': 'User must start with @'}
+					response_body = 'User must start with @'
 			else:
 				user_name = slack_user_info['user']['profile']['display_name']
 				slackhelper.post_message(f"Hi! {user_name} :smile:", channel)
