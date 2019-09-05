@@ -80,8 +80,6 @@ def create_app(config_name):
 		user_id = event['user']
 		channel = event['channel']
 		text = event['text']
-		print (text)
-
 
 		if type == 'url_verification':
 			response_body = request.data.get('challenge')
@@ -90,7 +88,7 @@ def create_app(config_name):
 			if not user_id == bot_id:
 				slackhelper = SlackHelper()
 				slack_user_info = slackhelper.user_info(user_id)
-				pattern = re.compile("@(?!\W)")
+				pattern = re.search("@(?!\W)")
 				print (text)
 				if pattern.match(text):
 					m = re.findall(r'[@]\w+', text)
