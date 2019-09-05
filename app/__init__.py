@@ -29,7 +29,7 @@ def create_app(config_name):
 		request = slackhelper.get_users_in_channel()
 		if request['ok']:
 			for item in request['members']:
-        		print(item['name'])
+				print(item['name'])
 		
 		response_body = {'text': ':)'}
 		response = jsonify(response_body)
