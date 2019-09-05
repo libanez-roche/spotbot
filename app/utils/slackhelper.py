@@ -27,7 +27,7 @@ class SlackHelper:
 			as_user=False
 		)
 
-	def get_users_in_channel(self, channel)
+	def get_users_in_channel(self):
 		return self.slack_client.api_call( 
 			"users.list",
 			channel=self.slack_channel
