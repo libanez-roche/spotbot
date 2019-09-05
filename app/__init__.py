@@ -31,6 +31,10 @@ def create_app(config_name):
 			for item in request['members']:
 				print(item['name'])
 
+	@app.route('/clean', methods=['GET'])
+	def clean():
+		redis_client.flushdb()
+
 	@app.route('/spotbot', methods=['POST'])
 	def hackabot():
 		command_text = request.data.get('text')
