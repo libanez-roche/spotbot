@@ -31,6 +31,7 @@ def create_app(config_name):
 			for item in request['members']:
 				print(item['name'])
 
+
 	@app.route('/clean', methods=['GET'])
 	def clean():
 		redis_client.flushdb()
@@ -107,7 +108,7 @@ def create_app(config_name):
 					print(m)
 					user = m[0]
 					print('user: ' + user)
-					print('user_info: ' + slack_user_info)
+					print(slack_user_info)
 					location = redis_client.get(user[1:]).decode('utf8') or 'The user hasn\'t set the location yet'
 					if location == 'The user hasn\'t set the location yet':
 						slackhelper.post_message(location, channel)
