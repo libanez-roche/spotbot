@@ -30,7 +30,8 @@ class SlackHelper:
 	def get_users_in_channel(self):
 		return self.slack_client.api_call( 
 			"groups.info",
-			channel='CN28Z2VL6'
+			channel='CN28Z2VL6',
+			token=self.slack_token
 		)
 
 	def file_upload(self, file_content, file_name, file_type, title=None, ):
