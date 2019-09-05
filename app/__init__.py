@@ -27,6 +27,7 @@ def create_app(config_name):
 	def send():
 		slackhelper = SlackHelper()
 		request = slackhelper.get_users_in_channel()
+		print(request)
 		if request['ok']:
 			for item in request['group']['members']:
 				print(item['name'])
