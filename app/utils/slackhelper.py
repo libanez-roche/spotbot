@@ -27,6 +27,12 @@ class SlackHelper:
 			as_user=False
 		)
 
+	def get_users_in_channel(self, channel)
+		return self.slack_client.api_call( 
+			"users.list",
+			channel=self.slack_channel
+		)
+
 	def file_upload(self, file_content, file_name, file_type, title=None, ):
 		return self.slack_client.api_call(
 			"files.upload",
