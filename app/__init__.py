@@ -100,6 +100,7 @@ def create_app(config_name):
 			if not user_id == bot_id:
 				slackhelper = SlackHelper()
 				slack_user_info = slackhelper.user_info(user_id)
+				user_name = slack_user_info['user']['name']
 				words_to_check = [' close to ',' near ',' next to ',' beside ',' in front of ',' behind ',' on ',' in ',' at ',' on ',' top of ',' within ',' beneath ',' under ','building','bau','basel','kau','kaiseraugst','floor']
 				
 				print (text)
@@ -109,14 +110,13 @@ def create_app(config_name):
 					user = m[0]
 					print('user: ' + user)
 					print(slack_user_info)
-					location = redis_client.get(user[1:]).decode('utf8') or 'The user hasn\'t set the location yet'
+					location = redis_client.get(user_name[1:]).decode('utf8') or 'The user hasn\'t set the location yet'
 					if location == 'The user hasn\'t set the location yet':
 						slackhelper.post_message(location, channel)
 					else:
 						slackhelper.post_message("The user %s is located in %s" % (user, location), channel)
 				elif any(word in text for word in words_to_check):
 					slackhelper = SlackHelper()
-					user_name = slack_user_info['user']['name']
 					print(user_name)
 					redis_client.set(user_name[1:], text.encode('utf8'))
 					slackhelper.post_message('Thank you! :smile: I have recorded your location.\nHave a good day!', channel)
