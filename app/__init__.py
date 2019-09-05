@@ -28,7 +28,7 @@ def create_app(config_name):
 		slackhelper = SlackHelper()
 		request = slackhelper.get_users_in_channel()
 		if request['ok']:
-			for item in request['members']:
+			for item in request['group']['members']:
 				print(item['name'])
 		response_body = {'text': ':)'}
 		response = jsonify(response_body)
