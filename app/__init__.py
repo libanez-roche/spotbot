@@ -24,7 +24,7 @@ def create_app(config_name):
 	redis_client = redis.from_url(os.environ.get("REDIS_URL"))
 
 	@app.route('/sendall', methods=['GET'])
-	def send():
+	def sendall():
 		slackhelper = SlackHelper()
 		request = slackhelper.get_users_in_channel()
 		print(request)
