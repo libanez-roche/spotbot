@@ -88,9 +88,8 @@ def create_app(config_name):
 			if not user_id == bot_id:
 				slackhelper = SlackHelper()
 				slack_user_info = slackhelper.user_info(user_id)
-				pattern = re.search("@(?!\W)", text)
 				print (text)
-				if pattern.match(text):
+				if re.search("@(?!\W)", text):
 					m = re.findall(r'[@]\w+', text)
 					print(m)
 					user = m[0]
