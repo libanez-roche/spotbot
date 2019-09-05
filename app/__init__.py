@@ -110,7 +110,6 @@ def create_app(config_name):
 						slackhelper.post_message("The user %s is located in %s" % (user, location), channel)
 				elif any(word in text for word in words_to_check):
 					slackhelper = SlackHelper()
-					slack_user_info = slackhelper.user_info(user_id)
 					user_name = slack_user_info['user']['name']
 					redis_client.set(user_name, text.encode('utf8'))
 					slackhelper.post_message('Thank you! :smile: I have recorded your location.\nHave a good day!', channel)
@@ -118,10 +117,10 @@ def create_app(config_name):
 					if len(redis_client.keys()) > 0:
 						print(redis_client.keys())
 				else:
-					slackhelper.post_message('Sorry :sad:, I didn\'t understand your request. If you need to search for a user use his username with the @.\nThank you! :smile:', channel)
+					slackhelper.post_message('Sorry :disappointed:, I didn\'t understand your request. If you need to search for a user use his username with the @.\nThank you! :smile:', channel)
 
 			else:
-				user_name = slack_user_info['user']['profile']['display_name']
+				print("nothing")
 		response = jsonify(response_body)
 		response.status_code = 200
 		return response
