@@ -125,7 +125,7 @@ def create_app(config_name):
 					if location == 'The user hasn\'t set the location yet':
 						slackhelper.post_message(location.decode('utf8'), channel)
 					else:
-						slackhelper.post_message("%s:  %s" % (clean_user_name, location), channel)
+						slackhelper.post_message("%s:  %s" % (clean_user_name, location.decode('utf8')), channel)
 				elif any(word in text for word in words_to_check):
 					slackhelper = SlackHelper()
 					print(user_name)
