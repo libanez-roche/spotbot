@@ -6,6 +6,8 @@ from app.utils.slackhelper import SlackHelper
 from flask import request, jsonify
 from app.actions import Actions
 from re import match
+import re
+
 
 allowed_commands = [
 		'info'
@@ -59,6 +61,7 @@ def create_app(config_name):
 		text = text.split(' ')
 		user = text[0]
 
+
 		if not user.startswith('@'):
 			response_body = {'text': 'User must start with @'}
 		else:
@@ -71,6 +74,7 @@ def create_app(config_name):
 
 	@app.route('/reaction', methods=['POST'])
 	def reaction():
+		text = request.data.get('text')
 		type = request.data.get('type')
 		event = request.data.get('event')
 		user_id = event['user']
@@ -83,9 +87,18 @@ def create_app(config_name):
 			if not user_id == bot_id:
 				slackhelper = SlackHelper()
 				slack_user_info = slackhelper.user_info(user_id)
+				pattern = re.compile("@(?!\W)")
+				if pattern.match(text):
+					m = re.findall(r'[@]\w+', text)
+					user = m[0]
+					location = redis_client.get(user[1:]) or 'The user hasn\'t set the location yet'
+					response_body = "The user %s is located in %s" % (user, location)
+				else:
+					response_body = {'text': 'User must start with @'}
+			else:
 				user_name = slack_user_info['user']['profile']['display_name']
 				slackhelper.post_message(f"Hi! {user_name} :smile:", channel)
-				print(slack_user_info)
+			print(request.data)
 
 		response = jsonify(response_body)
 		response.status_code = 200
