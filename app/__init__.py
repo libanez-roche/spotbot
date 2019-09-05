@@ -31,7 +31,6 @@ def create_app(config_name):
 			for item in request['members']:
 				print(item['name'])
 
-
 	@app.route('/clean', methods=['GET'])
 	def clean():
 		redis_client.flushdb()
@@ -115,7 +114,7 @@ def create_app(config_name):
 					if location == 'The user hasn\'t set the location yet':
 						slackhelper.post_message(location, channel)
 					else:
-						slackhelper.post_message("%s:  %s" % (user, location), channel)
+						slackhelper.post_message("%s:  %s" % (clean_user_name, location), channel)
 				elif any(word in text for word in words_to_check):
 					slackhelper = SlackHelper()
 					print(user_name)
