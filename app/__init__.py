@@ -46,6 +46,7 @@ def create_app(config_name):
 	@app.route('/change', methods=['POST'])
 	def change():
 		text = request.data.get('text')
+		print(text)
 		slack_uid = request.data.get('user_id')
 		slackhelper = SlackHelper()
 		slack_user_info = slackhelper.user_info(slack_uid)
