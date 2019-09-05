@@ -23,16 +23,24 @@ def create_app(config_name):
 	app.config.from_pyfile('../config/env.py')
 	redis_client = redis.from_url(os.environ.get("REDIS_URL"))
 
-	@app.route('/send', methods=['GET'])
+	@app.route('/sendall', methods=['GET'])
 	def send():
 		slackhelper = SlackHelper()
 		request = slackhelper.get_users_in_channel()
 		print(request)
 		if request['ok']:
 			for item in request['group']['members']:
-				print(item['name'])
-		slackhelper.post_message('Morning, where are you located today?', 'DN036B2PJ')
+				print(item)
 		
+		response_body = {'text': ':)'}
+		response = jsonify(response_body)
+		response.status_code = 200
+		return response
+
+	@app.route('/send', methods=['GET'])
+	def send():
+		slackhelper = SlackHelper()
+		slackhelper.post_message('Morning, where are you located today?', 'DN036B2PJ')
 		response_body = {'text': ':)'}
 		response = jsonify(response_body)
 		response.status_code = 200
