@@ -51,7 +51,7 @@ def create_app(config_name):
 		slackhelper = SlackHelper()
 		slack_user_info = slackhelper.user_info(slack_uid)
 		user_name = slack_user_info['user']['name']
-		redis_client.set(user_name, text)
+		redis_client.set(user_name, text.encode('utf8'))
 		response_body = "Location stored succesfully for user %s on %s" % (user_name, text)
 		response = jsonify(response_body)
 		response.status_code = 200
@@ -67,7 +67,7 @@ def create_app(config_name):
 		if not user.startswith('@'):
 			response_body = {'text': 'User must start with @'}
 		else:
-			location = redis_client.get(user[1:]) or 'The user hasn\'t set the location yet'
+			location = redis_client.get(user[1:]).decode('utf8') or 'The user hasn\'t set the location yet'
 			print(location)
 			response_body = "The user %s is located in %s" % (user, location)
 
@@ -96,7 +96,7 @@ def create_app(config_name):
 					print(m)
 					user = m[0]
 					print(user)
-					location = redis_client.get(user[1:]) or 'The user hasn\'t set the location yet'
+					location = redis_client.get(user[1:]).decode('utf8') or 'The user hasn\'t set the location yet'
 					if location == 'The user hasn\'t set the location yet':
 						slackhelper.post_message(location, channel)
 					else:
