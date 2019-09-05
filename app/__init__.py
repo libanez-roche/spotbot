@@ -29,7 +29,7 @@ def create_app(config_name):
 		request = slackhelper.get_users_in_channel()
 		if request['ok']:
 			for item in request['members']:
-				print item['name']
+				print(item['name'])
 
 	@app.route('/spotbot', methods=['POST'])
 	def hackabot():
