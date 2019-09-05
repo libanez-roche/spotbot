@@ -112,7 +112,7 @@ def create_app(config_name):
 				slack_user_info = slackhelper.user_info(user_id)
 				user_name = slack_user_info['user']['name']
 				clean_user_name = slack_user_info['user']['profile']['real_name_normalized']
-				words_to_check = [' close to ',' near ',' next to ',' beside ',' in front of ',' behind ',' on ',' in ',' at ',' on ',' top of ',' within ',' beneath ',' under ','building','bau','basel','kau','kaiseraugst','floor']
+				words_to_check = [' close to ',' near ',' next to ',' beside ',' in front of ',' behind ',' on ',' in ',' at ',' on ',' top of ',' within ',' beneath ',' under ','building','bau','basel','kau','kaiseraugst','floor','home','wfh','WFH']
 				
 				print (text)
 				if re.search("@(?!\W)", text):
