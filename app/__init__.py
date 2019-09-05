@@ -88,6 +88,7 @@ def create_app(config_name):
 				slackhelper = SlackHelper()
 				slack_user_info = slackhelper.user_info(user_id)
 				pattern = re.compile("@(?!\W)")
+				print (text)
 				if pattern.match(text):
 					m = re.findall(r'[@]\w+', text)
 					user = m[0]
