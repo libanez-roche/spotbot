@@ -31,6 +31,8 @@ def create_app(config_name):
 		if request['ok']:
 			for item in request['group']['members']:
 				print(item['name'])
+		slackhelper.post_message('Morning, where are you located today?', 'DN036B2PJ')
+		
 		response_body = {'text': ':)'}
 		response = jsonify(response_body)
 		response.status_code = 200
