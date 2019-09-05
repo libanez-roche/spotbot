@@ -68,6 +68,7 @@ def create_app(config_name):
 			response_body = {'text': 'User must start with @'}
 		else:
 			location = redis_client.get(user[1:]) or 'The user hasn\'t set the location yet'
+			print(location)
 			response_body = "The user %s is located in %s" % (user, location)
 
 		response = jsonify(response_body)
