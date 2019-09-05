@@ -96,11 +96,11 @@ def create_app(config_name):
 					print(user)
 					location = redis_client.get(user[1:]) or 'The user hasn\'t set the location yet'
 					if location == 'The user hasn\'t set the location yet':
-						slackhelper.post_message(location)
+						slackhelper.post_message(location, channel)
 					else:
-						slackhelper.post_message("The user %s is located in %s" % (user, location))
+						slackhelper.post_message("The user %s is located in %s" % (user, location), channel
 				else:
-					slackhelper.post_message('User must start with @')
+					slackhelper.post_message('User must start with @', channel)
 
 			else:
 				user_name = slack_user_info['user']['profile']['display_name']
