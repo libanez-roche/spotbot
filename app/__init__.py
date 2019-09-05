@@ -122,10 +122,16 @@ def create_app(config_name):
 					slackhelper.post_message('Thank you! :smile: I have recorded your location.\nHave a good day!', channel)
 				elif 'list' in text:
 					if len(redis_client.keys()) > 0:
+						list = ''
 						for user in redis_client.keys():
 							print(user)
 							print(slackhelper.user_info(user))
-							slackhelper.post_message('Good morning! Where are you located today?', user)
+							name =  slackhelper.user_info(user)['user']['profile']['real_name_normalized']
+							list = list + name + '\n'
+							slackhelper.post_message(list, user)
+					else:
+						slackhelper.post_message('Sorry, there are no users registered', user_id)
+
 				else:
 					slackhelper.post_message('Sorry :disappointed:, I didn\'t understand your request. If you need to search for a user use his username with the @.\nThank you! :smile:', channel)
 
