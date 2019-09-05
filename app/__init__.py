@@ -75,11 +75,11 @@ def create_app(config_name):
 
 	@app.route('/reaction', methods=['POST'])
 	def reaction():
-		text = json.dumps(request.data.get('text'), separators=(',', ':'))
 		type = request.data.get('type')
 		event = request.data.get('event')
 		user_id = event['user']
 		channel = event['channel']
+		text = event['text']
 		print (text)
 
 
