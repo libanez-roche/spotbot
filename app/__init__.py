@@ -68,7 +68,7 @@ def create_app(config_name):
 		text = request.data.get('text')
 		text = text.split(' ')
 		user = text[0]
-
+		print(user)
 
 		if not user.startswith('@'):
 			response_body = {'text': 'The username must start with @'}
@@ -102,7 +102,8 @@ def create_app(config_name):
 					m = re.findall(r'[@]\w+', text)
 					print(m)
 					user = m[0]
-					print(user)
+					print('user: ' + user)
+					print('user_info: ' + slack_user_info)
 					location = redis_client.get(user[1:]).decode('utf8') or 'The user hasn\'t set the location yet'
 					if location == 'The user hasn\'t set the location yet':
 						slackhelper.post_message(location, channel)
@@ -111,7 +112,8 @@ def create_app(config_name):
 				elif any(word in text for word in words_to_check):
 					slackhelper = SlackHelper()
 					user_name = slack_user_info['user']['name']
-					redis_client.set(user_name, text.encode('utf8'))
+					print(user_name)
+					redis_client.set(user_name[1:], text.encode('utf8'))
 					slackhelper.post_message('Thank you! :smile: I have recorded your location.\nHave a good day!', channel)
 				elif 'list' in text:
 					if len(redis_client.keys()) > 0:
