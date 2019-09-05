@@ -74,11 +74,13 @@ def create_app(config_name):
 
 	@app.route('/reaction', methods=['POST'])
 	def reaction():
-		text = request.data.get('text')
+		text = json.dumps(request.data.get('text'), separators=(',', ':'))
 		type = request.data.get('type')
 		event = request.data.get('event')
 		user_id = event['user']
 		channel = event['channel']
+		print (text)
+
 
 		if type == 'url_verification':
 			response_body = request.data.get('challenge')
