@@ -101,6 +101,7 @@ def create_app(config_name):
 				slackhelper = SlackHelper()
 				slack_user_info = slackhelper.user_info(user_id)
 				user_name = slack_user_info['user']['name']
+				clean_user_name = slack_user_info['user']['profile']['real_name_normalized']
 				words_to_check = [' close to ',' near ',' next to ',' beside ',' in front of ',' behind ',' on ',' in ',' at ',' on ',' top of ',' within ',' beneath ',' under ','building','bau','basel','kau','kaiseraugst','floor']
 				
 				print (text)
@@ -108,17 +109,17 @@ def create_app(config_name):
 					m = re.findall(r'[@]\w+', text)
 					print(m)
 					user = m[0]
-					print('user: ' + user)
+					print('username: ' + user_name)
 					print(slack_user_info)
-					location = redis_client.get(user_name[1:]).decode('utf8') or 'The user hasn\'t set the location yet'
+					location = redis_client.get(user_name).decode('utf8') or 'The user hasn\'t set the location yet'
 					if location == 'The user hasn\'t set the location yet':
 						slackhelper.post_message(location, channel)
 					else:
-						slackhelper.post_message("The user %s is located in %s" % (user, location), channel)
+						slackhelper.post_message("%s:  %s" % (user, location), channel)
 				elif any(word in text for word in words_to_check):
 					slackhelper = SlackHelper()
 					print(user_name)
-					redis_client.set(user_name[1:], text.encode('utf8'))
+					redis_client.set(user_name, text.encode('utf8'))
 					slackhelper.post_message('Thank you! :smile: I have recorded your location.\nHave a good day!', channel)
 				elif 'list' in text:
 					if len(redis_client.keys()) > 0:
