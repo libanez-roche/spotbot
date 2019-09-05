@@ -119,9 +119,9 @@ def create_app(config_name):
 					user = m[0]
 					print('username: ' + user_name)
 					print(slack_user_info)
-					location = redis_client.get(user_id).decode('utf8') or 'The user hasn\'t set the location yet'
+					location = redis_client.get(user_id) or 'The user hasn\'t set the location yet'
 					if location == 'The user hasn\'t set the location yet':
-						slackhelper.post_message(location, channel)
+						slackhelper.post_message(location.decode('utf8'), channel)
 					else:
 						slackhelper.post_message("%s:  %s" % (clean_user_name, location), channel)
 				elif any(word in text for word in words_to_check):
