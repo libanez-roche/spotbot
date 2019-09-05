@@ -30,10 +30,18 @@ def create_app(config_name):
 		if request['ok']:
 			for item in request['members']:
 				print(item['name'])
+		response_body = {'text': ':)'}
+		response = jsonify(response_body)
+		response.status_code = 200
+		return response
 
 	@app.route('/clean', methods=['GET'])
 	def clean():
 		redis_client.flushdb()
+		response_body = {'text': ':)'}
+		response = jsonify(response_body)
+		response.status_code = 200
+		return response
 
 	@app.route('/spotbot', methods=['POST'])
 	def hackabot():
