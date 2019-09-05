@@ -29,8 +29,7 @@ class SlackHelper:
 
 	def get_users_in_channel(self):
 		return self.slack_client.api_call( 
-			"groups.info",
-			channel='GN24H5KE0',
+			"users.list",
 			token=self.slack_token
 		)
 
