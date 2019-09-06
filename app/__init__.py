@@ -40,7 +40,7 @@ def create_app(config_name):
 	@app.route('/send', methods=['GET'])
 	def send():
 		slackhelper = SlackHelper()
-		slackhelper.post_message('Morning, where are you located today?', 'DN036B2PJ')
+		slackhelper.post_message('Morning, where are you located today?\nPlease write your location in one line (city, building, floor...)\nIf you need to search for a user, use his username with the @.\nThank you! :smile:', 'DN036B2PJ')
 		response_body = {'text': ':)'}
 		response = jsonify(response_body)
 		response.status_code = 200
