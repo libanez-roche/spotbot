@@ -30,6 +30,7 @@ def create_app(config_name):
 		if request['ok']:
 			for item in request['members']:
 				print(item['id'])
+				slackhelper.post_message('Morning, where are you located today?\nPlease write your location in one line (city, building, floor...)\nIf you need to search for a user, use his username with the @.\nThank you! :smile:', item['id'])
 		
 		response_body = {'text': ':)'}
 		response = jsonify(response_body)
