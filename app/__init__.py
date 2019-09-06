@@ -27,10 +27,9 @@ def create_app(config_name):
 	def sendall():
 		slackhelper = SlackHelper()
 		request = slackhelper.get_users_in_channel()
-		print(request)
 		if request['ok']:
 			for item in request['members']:
-				print(item['name'])
+				print(item['id'])
 		
 		response_body = {'text': ':)'}
 		response = jsonify(response_body)
