@@ -150,7 +150,7 @@ def create_app(config_name):
 							print(slackhelper.user_info(user))
 							name =  slackhelper.user_info(user)['user']['profile']['real_name_normalized']
 							list = list + name + ': '+ redis_client.get(user).decode('utf8') + '\n'
-							slackhelper.post_message(list, user_id)
+						slackhelper.post_message(list, user_id)
 					else:
 						slackhelper.post_message('Sorry, there are no users registered', user_id)
 
