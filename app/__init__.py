@@ -119,7 +119,7 @@ def create_app(config_name):
 				slack_user_info = slackhelper.user_info(user_id)
 				user_name = slack_user_info['user']['name']
 				clean_user_name = slack_user_info['user']['profile']['real_name_normalized']
-				words_to_check = [' close to ',' near ',' next to ',' beside ',' in front of ',' behind ',' on ',' in ',' at ',' on ',' top of ',' within ',' beneath ',' under ','building','bau','basel','kau','kaiseraugst','floor','home','wfh','WFH', 'Kau','Kaiseraugst']
+				words_to_check = [' close to ',' near ',' next to ',' beside ',' in front of ',' behind ',' on ',' in ',' at ',' on ',' top of ',' within ',' beneath ',' under ','building','bau','basel','kau','kaiseraugst','floor','home','wfh']
 				
 				print (text)
 				if re.search("@(?!\W)", text):
@@ -135,7 +135,7 @@ def create_app(config_name):
 						slackhelper.post_message(location.decode('utf8'), channel)
 					else:
 						slackhelper.post_message("%s:  %s" % (search_clean_user_name, location.decode('utf8')), channel)
-				elif any(word in text for word in words_to_check):
+				elif any(word.lower() in text.lower() for word in words_to_check):
 					slackhelper = SlackHelper()
 					print(user_name)
 					redis_client.set(user_id, text)
