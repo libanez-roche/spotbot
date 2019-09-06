@@ -154,7 +154,7 @@ def create_app(config_name):
 						slackhelper.post_message('Sorry, there are no users registered', user_id)
 
 				else:
-					slackhelper.post_message('Sorry :disappointed:, I didn\'t understand your request. If you need to search for a user use his username with the @.\nThank you! :smile:', channel)
+					slackhelper.post_message('Sorry :disappointed:, I didn\'t understand your request.\n - If you want to add your location, please say in one line where are you located (city, building, floor...)\nIf you need to search for a user use his username with the @.\nThank you! :smile:', channel)
 
 			else:
 				print("nothing")
