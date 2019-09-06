@@ -144,6 +144,7 @@ def create_app(config_name):
 				elif 'list' in text:
 					if len(redis_client.keys()) > 0:
 						list = ''
+						print(redis_client.keys())
 						for user in redis_client.keys():
 							print(user)
 							print(slackhelper.user_info(user))
