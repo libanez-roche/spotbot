@@ -127,8 +127,9 @@ def create_app(config_name):
 					print(m)
 					user = m[0]
 					print('username: ' + user_name)
-					print(slack_user_info)
+					print('user: ' + user)
 					search_user_info = slackhelper.user_info(user)
+					print(search_user_info)
 					search_clean_user_name = search_user_info['user']['profile']['real_name_normalized']
 					location = redis_client.get(user[1:]) or 'The user hasn\'t set the location yet'
 					if location == 'The user hasn\'t set the location yet':
